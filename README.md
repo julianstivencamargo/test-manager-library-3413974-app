@@ -1,51 +1,45 @@
-# test-manager-library-3413974-app
+# test-manager-library-3413974-app — Aplicación de Gestión (React)
 
-> **Prueba técnica · Ficha ADSO 3413974**
-> Horario: de **9:15 a. m. a 3:00 p. m.** (15:00). Después, **feria de presentación** de cada proyecto.
+Frontend SPA en React para la gestión integral de **Manager Library** (Ficha ADSO 3413974 — T-22).
 
-Este repositorio es el **frontend** de *Manager Library*, en **React**. **Empieza vacío a propósito**: se construye en el fork de cada aprendiz.
+## Funcionalidades Implementadas
 
-## Instrucciones
+1. **Autenticación JWT:**
+   - Inicio de sesión con credenciales (`admin` o `librarian`).
+   - Token almacenado en almacenamiento local con expiración de 8 horas.
+   - Restricción visual de acciones según rol.
 
-Cada aprendiz debe **crear el fork** de los seis repositorios del proyecto y **resolver el proyecto
-con el spec planteado**.
+2. **Catálogo de Libros:**
+   - Exploración paginada con búsqueda predictiva por texto (título/autor) y filtro por categoría.
+   - Visualización de ISBN-13 y stock disponible en tiempo real.
+   - Creación y baja lógica de libros (exclusivo rol `admin`).
 
-1. Hacer fork, a su cuenta de GitHub, de cada repositorio de la tabla del final.
-2. Leer el spec en [`test-manager-library-3413974-docs`](https://github.com/code-sena/test-manager-library-3413974-docs).
-   Se entrega en dos versiones: `spec-python/` y `spec-.net/`.
-3. Desarrollar en los forks.
+3. **Socios:**
+   - Búsqueda y listado de socios registrados.
+   - Registro de nuevos socios con cédula/documento único.
 
-## El reto se desarrolla con React y PHP (Laravel)
+4. **Préstamos:**
+   - Registro de préstamos multi-línea (1 a 3 libros por operación).
+   - Inclusión de socios validados.
+   - Listado con estados calculados en tiempo real (`open`, `overdue`, `closed`).
+   - Devolución individual por línea con actualización inmediata de stock disponible.
 
-El spec está escrito para Python y para .NET, pero el reto **no** se hace en esos lenguajes:
+5. **Libros Vencidos:**
+   - Panel operativo para bibliotecarios y administradores.
+   - Muestra líneas sin devolver cuyo plazo de 14 días venció, ordenadas por mayor retraso.
 
-| Capa | Tecnología del reto |
-|---|---|
-| Frontend | React |
-| Backend | PHP con Laravel |
+6. **Reportes (Admin):**
+   - Ranking de libros más prestados por rango de fechas (desde/hasta).
+   - Conservación inmutable de títulos y categorías congeladas en el préstamo (ADR-004).
 
-Lo que el spec define sobre el negocio —historias, criterios de aceptación, reglas, contrato de la
-API, modelo de datos— se respeta. Lo que define sobre la tecnología se traduce a React y Laravel.
+## Ejecución
 
-## La prueba no consiste en escribir el código
+### Con Docker Compose (Recomendado)
+Inicie la infraestructura completa desde `test-manager-library-3413974-infra`. La aplicación estará disponible en `http://localhost:3000`.
 
-El propósito principal es ver la **capacidad de desempeño con SDD** (*Spec-Driven Development*,
-desarrollo guiado por especificación): cómo se lee, se interpreta y se aplica una especificación
-para llevarla a un stack distinto. El código es el medio, no el fin.
-
-## Feria de presentación
-
-Al cerrar la prueba (3:00 p. m.) cada aprendiz **presenta su proyecto** al grupo: qué construyó del spec, qué dejó fuera y por qué,
-y una demostración corta de lo que funciona (la aplicación y el sitio público). Lo que se presenta es lo que quedó **subido a los forks
-antes de las 3:00 p. m.**: no se presenta nada que no esté en GitHub.
-
-## Los seis repositorios
-
-| Repositorio | Qué va ahí |
-|---|---|
-| [`test-manager-library-3413974-docs`](https://github.com/code-sena/test-manager-library-3413974-docs) | El spec: `spec-python/` y `spec-.net/` |
-| [`test-manager-library-3413974-api`](https://github.com/code-sena/test-manager-library-3413974-api) | Backend en PHP (Laravel) |
-| [`test-manager-library-3413974-app`](https://github.com/code-sena/test-manager-library-3413974-app) | Frontend en React |
-| [`test-manager-library-3413974-page`](https://github.com/code-sena/test-manager-library-3413974-page) | Sitio público estático de presentación |
-| [`test-manager-library-3413974-infra`](https://github.com/code-sena/test-manager-library-3413974-infra) | Contenedores, red, volúmenes y motor de base de datos vacío |
-| [`test-manager-library-3413974-tool`](https://github.com/code-sena/test-manager-library-3413974-tool) | Utilidades: sembrador de datos de demostración |
+### Modo Desarrollo Local
+```bash
+npm install
+npm run dev
+```
+Acceda a `http://localhost:3000`.
